@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         //Movement Player
         playerInput.x = Input.GetAxisRaw("Horizontal");
         playerInput.y = Input.GetAxisRaw("Vertical");
+        
 
         if (playerInput.x > 0f ) //Move right = D
         {

@@ -17,17 +17,26 @@ public class RoomSwitch : Interactuable
 
     protected override void Update()
     {
-        base.Update();
+        
         overlapedColliders = Physics2D.OverlapCircleAll(interactionAreaPivot.position, interactionAreaRadio);
 
         readyToInteract = false;
+
         if (overlapedColliders.Length > 0)
         {
             foreach (Collider2D objCollider in overlapedColliders)
             {
-                readyToInteract = objCollider.CompareTag(K.Tag.player);
+                if (objCollider.CompareTag(K.Tag.player))
+                {
+                    readyToInteract = true;
+                }
                 print(readyToInteract);
             }
+        }
+        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
         }
 
     }
@@ -56,9 +65,9 @@ public class RoomSwitch : Interactuable
         //Logic to interact and perform required actions
         if (!interactionEnabled || !readyToInteract)
             return;
-        print("hi");
         SwitchRoom();
     }
+
 
     
 
