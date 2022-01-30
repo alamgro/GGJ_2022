@@ -9,7 +9,6 @@ public class RoomSwitch : Interactuable
     [SerializeField] private GameObject targetDeadRoom;
     [SerializeField] private GameObject currentRoom; //The room where this door/stairs is located
     [SerializeField] private Transform playerInitPositionInRoom;
-    [SerializeField] private AudioClip switchSound;
 
     void Start()
     {
@@ -19,12 +18,25 @@ public class RoomSwitch : Interactuable
     protected override void Update()
     {
         base.Update();
+        overlapedColliders = Physics2D.OverlapCircleAll(interactionAreaPivot.position, interactionAreaRadio);
+
+        readyToInteract = false;
+        if (overlapedColliders.Length > 0)
+        {
+            foreach (Collider2D objCollider in overlapedColliders)
+            {
+                readyToInteract = objCollider.CompareTag(K.Tag.player);
+                print(readyToInteract);
+            }
+        }
+
     }
 
     public void SwitchRoom()
     {
         GameManager.Instance.currentAliveRoom = targetAliveRoom;
         GameManager.Instance.currentDeadRoom = targetDeadRoom;
+        GameManager.Instance.Fade();
         if (GameManager.Instance.IsPlayerStateAlive)
         {
             targetAliveRoom.SetActive(true);
@@ -32,7 +44,6 @@ public class RoomSwitch : Interactuable
         else
         {
             targetDeadRoom.SetActive(true);
-            AudioSource.PlayClipAtPoint(switchSound, Vector2.zero);
         }
         GameManager.Instance.player.transform.position = playerInitPositionInRoom.position;
         //print(GameManager.Instance.IsPlayerStateAlive);
@@ -41,11 +52,11 @@ public class RoomSwitch : Interactuable
 
     public override void Interact()
     {
-        base.Interact();
+        //base.Interact();
         //Logic to interact and perform required actions
         if (!interactionEnabled || !readyToInteract)
             return;
-
+        print("hi");
         SwitchRoom();
     }
 

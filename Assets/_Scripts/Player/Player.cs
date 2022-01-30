@@ -28,11 +28,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.PlayerInteracting)
+            return;
         //Movement Player
         playerInput.x = Input.GetAxisRaw("Horizontal");
         playerInput.y = Input.GetAxisRaw("Vertical");
 
-        playerMove = Vector2.zero;
         if (playerInput.x > 0f ) //Move right = D
         {
             //playerMove = new Vector2(1f, -1f).normalized;
@@ -67,6 +68,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            playerMove = Vector2.zero;
             transform.localScale = Vector3.one;
             anim.SetBool(K.Animation.backWalk, false);
             anim.SetBool(K.Animation.frontWalk, false);
@@ -87,7 +89,9 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + playerMove  * moveSpeed * Time.fixedDeltaTime);
+        if (GameManager.Instance.PlayerInteracting)
+            return;
+        rb.velocity = playerMove * moveSpeed * Time.fixedDeltaTime;
     }
     
 }

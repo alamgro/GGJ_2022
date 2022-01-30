@@ -8,13 +8,15 @@ public class Interactuable : MonoBehaviour
     [Header("Interaction area attributes")]
     [SerializeField] protected Transform interactionAreaPivot;
     [SerializeField] protected float interactionAreaRadio;
+    [TextArea]
+    [SerializeField] protected string[] sentences;
 
-    private Collider2D[] overlapedColliders;
+    protected Collider2D[] overlapedColliders;
     protected bool readyToInteract = false;
 
     protected virtual void Update()
     {
-        overlapedColliders = Physics2D.OverlapCircleAll(interactionAreaPivot.position, interactionAreaRadio);
+        /*overlapedColliders = Physics2D.OverlapCircleAll(interactionAreaPivot.position, interactionAreaRadio);
 
         readyToInteract = false;
         if (overlapedColliders.Length > 0)
@@ -22,9 +24,10 @@ public class Interactuable : MonoBehaviour
             foreach (Collider2D objCollider in overlapedColliders)
             {
                 readyToInteract = objCollider.CompareTag(K.Tag.player);
+                print(readyToInteract);
             }
         }
-        
+        */
         //print(readyToInteract);
         //DEBUG
         if (Input.GetKeyDown(KeyCode.E))
@@ -33,8 +36,26 @@ public class Interactuable : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(K.Tag.player))
+        {
+            readyToInteract = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag(K.Tag.player))
+        {
+            readyToInteract = false;
+        }
+    }
+
     protected void OnDrawGizmos()
     {
+        if (sentences.Length > 0)
+            return;
         Gizmos.color = Color.green;
         if(interactionAreaPivot && interactionAreaRadio > 0f)
         Gizmos.DrawWireSphere(interactionAreaPivot.position, interactionAreaRadio);
@@ -42,13 +63,15 @@ public class Interactuable : MonoBehaviour
 
     public virtual void Interact()
     {
-        print("Interacting...");
-
+        if(interactionEnabled &&  readyToInteract)
+            SayDialogs();
     }
 
-    public virtual void Dialog()
+    public virtual void SayDialogs()
     {
-        print("Dialog...");
-
+        if(sentences.Length > 0)
+        print("Interacting...");
+        Dialog.Instance.sentences = sentences;
+        Dialog.Instance.StartTyping();
     }
 }
