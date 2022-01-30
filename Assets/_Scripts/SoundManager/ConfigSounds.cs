@@ -34,7 +34,6 @@ public class ConfigSounds : MonoBehaviour
         reproduceSoundInTime = Random.Range(rangeReproduceSound.x, rangeReproduceSound.y);
     }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
@@ -46,6 +45,7 @@ public class ConfigSounds : MonoBehaviour
             reproduceSoundInTime = Random.Range(rangeReproduceSound.x, rangeReproduceSound.y);
         }
     }
+
     public void gameSound()
     {
         volume = sliderVolume.value;

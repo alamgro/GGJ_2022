@@ -53,6 +53,21 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-4111945622405800915
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bc1a175ad065348a779cf89aed66dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiempoDer: 0.25
+  tiempoIzq: 0.75
+  footSteps: {fileID: 8300000, guid: d62089f5ce1cde44c819c55f1b260a29, type: 3}
 --- !u!1101 &-3167426819803555773
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -204,11 +219,12 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BackWalk_Alive
-  m_Speed: 1
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1818284163282978210}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -4111945622405800915}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -235,6 +251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bc1a175ad065348a779cf89aed66dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tiempoDer: 0.25
+  tiempoIzq: 0.75
+  footSteps: {fileID: 8300000, guid: d62089f5ce1cde44c819c55f1b260a29, type: 3}
 --- !u!1102 &7818556137578637524
 AnimatorState:
   serializedVersion: 6

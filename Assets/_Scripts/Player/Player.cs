@@ -14,13 +14,16 @@ public class Player : MonoBehaviour
 
     [SerializeField] private RuntimeAnimatorController aliveAnimController;
     [SerializeField] private RuntimeAnimatorController deadAnimController;
+    [SerializeField] private AudioClip deadFootSteps;
     
     private Animator anim;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         
         anim.runtimeAnimatorController = aliveAnimController;
     }
@@ -33,7 +36,19 @@ public class Player : MonoBehaviour
         //Movement Player
         playerInput.x = Input.GetAxisRaw("Horizontal");
         playerInput.y = Input.GetAxisRaw("Vertical");
-        
+
+        if (!GameManager.Instance.IsPlayerStateAlive)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.loop = true;
+                audioSource.PlayOneShot(deadFootSteps, ConfigSounds.Instance.volume);
+            }
+        }
+        else
+        {
+            audioSource.loop = false;
+        }
 
         if (playerInput.x > 0f ) //Move right = D
         {
