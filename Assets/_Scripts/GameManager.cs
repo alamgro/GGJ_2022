@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public void Fade()
     {
         anim.Play(K.Animation.fadeIn);
+        anim.Play(K.Animation.fadeOut);
     }
 
 }

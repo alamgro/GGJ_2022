@@ -18,6 +18,7 @@ public class K
         public const string frontWalk = "FrontWalk";
         public const string backWalk = "BackWalk";
         public const string fadeIn = "FadeIn";
+        public const string fadeOut = "FadeOut";
 
     }
 }
