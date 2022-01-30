@@ -18,7 +18,7 @@ public class Dialog : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         yield return new WaitForSecondsRealtime(1f);
-        if(UI_dialogDisplay)
+        if(UI_dialogDisplay.gameObject.activeInHierarchy)
             StartCoroutine(Type());
     }
 

@@ -11,10 +11,12 @@ public class GameManager : MonoBehaviour
 
     public GameObject currentDeadRoom;
     public GameObject currentAliveRoom;
+    public bool IsPlayerStateAlive { get; set; }
 
     void Awake()
     {
         instance = this;
+        IsPlayerStateAlive = true;
     }
 
     // Update is called once per frame
@@ -23,4 +25,5 @@ public class GameManager : MonoBehaviour
         
     }
 
+    
 }
