@@ -13,13 +13,16 @@ public class GameManager : MonoBehaviour
     public GameObject currentAliveRoom;
     public bool IsPlayerStateAlive { get; set; }
 
+    [HideInInspector]
+    public Player player;
+
     void Awake()
     {
         instance = this;
+        player = GameObject.FindGameObjectWithTag(K.Tag.player).GetComponent<Player>();
         IsPlayerStateAlive = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         

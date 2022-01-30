@@ -15,9 +15,9 @@ public class RoomSwitch : Interactuable
        
     }
 
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 
     public void SwitchRoom()
@@ -30,11 +30,23 @@ public class RoomSwitch : Interactuable
         }
         else
         {
-
+            targetDeadRoom.SetActive(true);
         }
-        print(GameManager.Instance.IsPlayerStateAlive);
+        GameManager.Instance.player.transform.position = playerInitPositionInRoom.position;
+        //print(GameManager.Instance.IsPlayerStateAlive);
         currentRoom.SetActive(false);
-
     }
+
+    public override void Interact()
+    {
+        base.Interact();
+        //Logic to interact and perform required actions
+        if (!interactionEnabled || !readyToInteract)
+            return;
+
+        SwitchRoom();
+    }
+
+    
 
 }

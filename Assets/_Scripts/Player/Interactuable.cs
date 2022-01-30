@@ -10,22 +10,22 @@ public class Interactuable : MonoBehaviour
     [SerializeField] protected float interactionAreaRadio;
 
     private Collider2D[] overlapedColliders;
-    private bool readyToInteract = false;
+    protected bool readyToInteract = false;
 
-    private void Update()
+    protected virtual void Update()
     {
         overlapedColliders = Physics2D.OverlapCircleAll(interactionAreaPivot.position, interactionAreaRadio);
-        if(overlapedColliders.Length > 0)
+
+        readyToInteract = false;
+        if (overlapedColliders.Length > 0)
         {
             foreach (Collider2D objCollider in overlapedColliders)
             {
-                if (objCollider.CompareTag(K.Tag.player))
-                {
-                    readyToInteract = true;
-                }
+                readyToInteract = objCollider.CompareTag(K.Tag.player);
             }
         }
-
+        
+        print(readyToInteract);
         //DEBUG
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -41,19 +41,16 @@ public class Interactuable : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         if(interactionAreaPivot && interactionAreaRadio > 0f)
         Gizmos.DrawWireSphere(interactionAreaPivot.position, interactionAreaRadio);
     }
 
-    public void Interact()
+    public virtual void Interact()
     {
-        //Logic to interact and perform required actions
-        if (!interactionEnabled || !readyToInteract)
-            return;
-
+        
         print("Interacting...");
 
     }
