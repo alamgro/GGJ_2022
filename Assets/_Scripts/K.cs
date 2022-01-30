@@ -12,5 +12,12 @@ public class K
     {
         public const string volume = "Volume" ;
     }
+
+    public class Animation
+    {
+        public const string frontWalk = "FrontWalk";
+        public const string backWalk = "BackWalk";
+
+    }
 }
 

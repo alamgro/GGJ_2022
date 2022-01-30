@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return instance; } }
     #endregion
 
-    public GameObject currentDeadRoom;
     public GameObject currentAliveRoom;
+    public GameObject currentDeadRoom;
     public bool IsPlayerStateAlive { get; set; }
 
     [HideInInspector]
@@ -21,12 +22,16 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag(K.Tag.player).GetComponent<Player>();
         IsPlayerStateAlive = true;
+        print( Quaternion.AngleAxis(-26f, Vector3.forward) * Vector3.right);
     }
 
-    void Update()
+    public void SwitchDimension()
     {
-        
-    }
+        print("Switching dimension...");
+        IsPlayerStateAlive = !IsPlayerStateAlive;
 
+        currentAliveRoom.SetActive(IsPlayerStateAlive);
+        currentDeadRoom.SetActive(!IsPlayerStateAlive);
+    }
     
 }

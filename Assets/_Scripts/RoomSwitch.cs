@@ -9,6 +9,7 @@ public class RoomSwitch : Interactuable
     [SerializeField] private GameObject targetDeadRoom;
     [SerializeField] private GameObject currentRoom; //The room where this door/stairs is located
     [SerializeField] private Transform playerInitPositionInRoom;
+    [SerializeField] private AudioClip switchSound;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class RoomSwitch : Interactuable
         else
         {
             targetDeadRoom.SetActive(true);
+            AudioSource.PlayClipAtPoint(switchSound, Vector2.zero);
         }
         GameManager.Instance.player.transform.position = playerInitPositionInRoom.position;
         //print(GameManager.Instance.IsPlayerStateAlive);

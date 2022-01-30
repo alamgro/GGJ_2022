@@ -25,19 +25,11 @@ public class Interactuable : MonoBehaviour
             }
         }
         
-        print(readyToInteract);
+        //print(readyToInteract);
         //DEBUG
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
-        }
-    }
-
-    protected void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag(K.Tag.player))
-        {
-            
         }
     }
 
@@ -50,13 +42,13 @@ public class Interactuable : MonoBehaviour
 
     public virtual void Interact()
     {
-        
         print("Interacting...");
 
     }
 
-    protected void Dialog()
+    public virtual void Dialog()
     {
+        print("Dialog...");
 
     }
 }
