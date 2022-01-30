@@ -7,11 +7,10 @@ public class Player : MonoBehaviour
     //Move
     public float  moveSpeed;
     public Rigidbody2D rb;
-    Vector2 move;
+    Vector2 playerInput;
+    Vector2 playerMove;
     //GestionWorlds
     public GestionObjects gestionObjects;
-    public GameObject rendGod;
-    public GameObject rendBad;
     
     // Start is called before the first frame update
     void Start()
@@ -23,16 +22,28 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Movement Player
-        move.x = Input.GetAxisRaw("Horizontal");
-        move.y = Input.GetAxisRaw("Vertical");
-        if (move.x != 0)
+        playerInput.x = Input.GetAxisRaw("Horizontal");
+        playerInput.y = Input.GetAxisRaw("Vertical");
+
+        playerMove = Vector2.zero;
+        if (playerInput.x > 0f ) //Move right = D
         {
-            move.y = 0;
+            playerMove = new Vector2(1f, -1f).normalized;
         }
-        else if (move.y != 0)
+        else if (playerInput.x < 0f) //Move left = A
         {
-            move.x = 0;
+            playerMove = new Vector2(-1f, 1f).normalized;
         }
+        else if (playerInput.y > 0f) // Move Up = W
+        {
+            
+            playerMove = new Vector2(1f, 1f).normalized;
+        }
+        else if (playerInput.y < 0f) //Move Down = S
+        {
+            playerMove = new Vector2(-1f, -1f).normalized;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             gestionObjects.DesActivateObjects();
@@ -40,11 +51,11 @@ public class Player : MonoBehaviour
         
         //Animator
 
-
     }
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + move * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + playerMove  * moveSpeed * Time.fixedDeltaTime);
     }
+    
 }
     
