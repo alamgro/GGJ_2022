@@ -25,6 +25,12 @@ public class Interactuable : MonoBehaviour
                 }
             }
         }
+
+        //DEBUG
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
@@ -45,8 +51,10 @@ public class Interactuable : MonoBehaviour
     public void Interact()
     {
         //Logic to interact and perform required actions
-        if (interactionEnabled && readyToInteract)
-            print("HI HI!");
+        if (!interactionEnabled || !readyToInteract)
+            return;
+
+        print("Interacting...");
 
     }
 
