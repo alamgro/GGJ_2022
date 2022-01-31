@@ -30,7 +30,7 @@ public class SwitchScene : MonoBehaviour
         playMoan.Play();
         yield return new WaitForSeconds(3f);
         Debug.Log("Comenzando Juego");
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("AlamTesting");
         
         soundPlayMoan();
     }
