@@ -8,6 +8,7 @@ public class RoomSwitch : Interactuable
     [SerializeField] private GameObject targetAliveRoom;
     [SerializeField] private GameObject targetDeadRoom;
     [SerializeField] private GameObject currentRoom; //The room where this door/stairs is located
+    [Header("Player Target position")]
     [SerializeField] private Transform playerInitPositionInRoom;
 
     void Start()
@@ -30,7 +31,7 @@ public class RoomSwitch : Interactuable
                 {
                     readyToInteract = true;
                 }
-                print(readyToInteract);
+                //print(readyToInteract);
             }
         }
         

@@ -44,8 +44,17 @@ public class GameManager : MonoBehaviour
 
     public void Fade()
     {
+        StartCoroutine(FadeEffect());
+        
+        //(anim.Play(K.Animation.fadeOut);
+    }
+
+    private IEnumerator FadeEffect()
+    {
+        anim.gameObject.SetActive(true);
         anim.Play(K.Animation.fadeIn);
-        anim.Play(K.Animation.fadeOut);
+        yield return new WaitForSecondsRealtime(1f);
+        anim.gameObject.SetActive(false);
     }
 
 }
